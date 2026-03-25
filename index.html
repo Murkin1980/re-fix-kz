@@ -7,6 +7,9 @@
     <meta name="keywords" content="ремонт мебели Алматы, ремонт кухни, ремонт шкафов, замена фурнитуры, столешницы, встраиваемая техника">
     <title>re-fix.kz — Ремонт корпусной мебели в Алматы</title>
     
+    <link rel="icon" type="image/svg+xml" href="assets/logo-refix-icon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/logo-refix-icon.svg">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -85,15 +88,20 @@
         }
         
         .logo {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--primary);
+            display: flex;
+            align-items: center;
             text-decoration: none;
         }
         
-        .logo span {
-            color: var(--secondary);
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+        
+        @media (max-width: 768px) {
+            .logo img {
+                height: 32px;
+            }
         }
         
         .nav {
@@ -1077,7 +1085,9 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <a href="#" class="logo">re-fix<span>.kz</span></a>
+            <a href="#" class="logo">
+                <img src="assets/logo-refix-full.svg" alt="Re-Fix — ремонт корпусной мебели">
+            </a>
                     <p>Профессиональный ремонт корпусной мебели в Алматы и Алматинской области. Качество, надёжность, честные цены.</p>
                 </div>
                 <div>
