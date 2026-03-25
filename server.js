@@ -29,12 +29,14 @@ app.post('/api/chat', async (req, res) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${PORTKEY_API_KEY}`,
-                'x-portkey-provider': 'google-ai'
+                'Authorization': `Bearer ${PORTKEY_API_KEY}`
             },
             body: JSON.stringify({
                 model: 'gemini-1.5-flash',
-                messages: [systemMessage, ...messages]
+                messages: [systemMessage, ...messages],
+                provider: {
+                    group: 'google-ai'
+                }
             })
         });
 
