@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="re-fix.kz — профессиональный ремонт корпусной мебели в Алматы и Алматинской области. Ремонт шкафов, кухонной мебели, замена фурнитуры, врезка моек и техники.">
+    <meta name="keywords" content="ремонт мебели Алматы, ремонт кухни, ремонт шкафов, замена фурнитуры, столешницы, встраиваемая техника">
+    <title>re-fix.kz — Ремонт корпусной мебели в Алматы</title>
+    
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        :root {
+            --primary: #2C3E50;
+            --secondary: #E67E22;
+            --background: #FAFAFA;
+            --surface: #FFFFFF;
+            --text-primary: #2C3E50;
+            --text-secondary: #7F8C8D;
+            --success: #27AE60;
+            --error: #E74C3C;
+            --whatsapp: #25D366;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.15);
+            --radius: 8px;
+            --radius-sm: 4px;
+            --transition: 200ms ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Open Sans', system-ui, sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+        
+        .header.scrolled {
+            box-shadow: var(--shadow);
+        }
+        
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+        
+        @media (max-width: 768px) {
+            .logo img {
+                height: 32px;
+            }
+        }
+        
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        
+        .nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .nav a:hover {
+            color: var(--secondary);
+        }
+        
+        .header-phone {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .header-phone:hover {
+            color: var(--secondary);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--primary);
+        }
+        
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.9) 0%, rgba(44, 62, 80, 0.7) 100%),
+                        url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1920&q=80') center/cover;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            color: white;
+            max-width: 700px;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: 24px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #D35400;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        
+        /* Services */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+        
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        
+        .service-card {
+            background: var(--surface);
+            padding: 32px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(230, 126, 34, 0.1);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .service-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+        
+        .service-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* Why Us */
+        .why-us {
+            background: var(--surface);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 24px;
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--secondary) 0%, #D35400 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+        }
+        
+        .feature h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+        
+        .feature p {
+            color: var(--text-secondary);
+        }
+        
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            aspect-ratio: 4/3;
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(44, 62, 80, 0.9));
+            padding: 24px;
+            color: white;
+        }
+        
+        .portfolio-overlay h4 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+        
+        .portfolio-overlay span {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Service Area */
+        .service-area {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .service-area .section-title {
+            color: white;
+        }
+        
+        .service-area .section-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .area-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+        
+        .area-list {
+            list-style: none;
+        }
+        
+        .area-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .area-list i {
+            color: var(--secondary);
+        }
+        
+        .area-map {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius);
+            padding: 32px;
+            text-align: center;
+        }
+        
+        .area-map i {
+            width: 120px;
+            height: 120px;
+            color: var(--secondary);
+            margin-bottom: 16px;
+        }
+        
+        .area-map p {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        
+        /* Contact Form */
+        .contact {
+            background: var(--background);
+        }
+        
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            color: var(--primary);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-item-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(230, 126, 34, 0.1);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+        }
+        
+        .contact-item-text h4 {
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+        
+        .contact-item-text p, .contact-item-text a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+        
+        .contact-item-text a:hover {
+            color: var(--secondary);
+        }
+        
+        .contact-form {
+            background: var(--surface);
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #E0E0E0;
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+        
+        .form-group input.error,
+        .form-group select.error {
+            border-color: var(--error);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .form-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .form-submit:hover {
+            background: #D35400;
+        }
+        
+        .form-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+        
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .form-success.show {
+            display: block;
+        }
+        
+        .form-success i {
+            width: 64px;
+            height: 64px;
+            color: var(--success);
+            margin-bottom: 16px;
+        }
+        
+        .form-success h3 {
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        
+        .form-success p {
+            color: var(--text-secondary);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 48px 0 24px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 32px;
+        }
+        
+        .footer-brand .logo {
+            color: white;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+        
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 300px;
+        }
+        
+        .footer h4 {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 24px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 60px;
+            height: 60px;
+            background: var(--whatsapp);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            z-index: 999;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            color: white;
+        }
+        
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Mobile Menu */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--surface);
+            z-index: 999;
+            padding: 80px 24px 24px;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        .mobile-nav.open {
+            display: flex;
+        }
+        
+        .mobile-nav a {
+            font-size: 1.25rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 12px 0;
+            border-bottom: 1px solid #E0E0E0;
+        }
+        
+        .mobile-nav-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--primary);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .area-content,
+            .contact-wrapper,
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .area-map {
+                order: -1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav, .header-phone {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .hero-buttons .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .contact-form {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="#" class="logo">
+                <img src="assets/logo.png" alt="Re-Fix — ремонт корпусной мебели">
+            </a>
+            <nav class="nav">
+                <a href="#services">Услуги</a>
+                <a href="#why-us">Преимущества</a>
+                <a href="#portfolio">Портфолио</a>
+                <a href="#contact">Контакты</a>
+            </nav>
+            <a href="tel:+77059164337" class="header-phone">
+                <i data-lucide="phone"></i>
+                +7 705 916 43 37
+            </a>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav">
+        <button class="mobile-nav-close" onclick="toggleMobileMenu()">
+            <i data-lucide="x"></i>
+        </button>
+        <a href="#services" onclick="toggleMobileMenu()">Услуги</a>
+        <a href="#why-us" onclick="toggleMobileMenu()">Преимущества</a>
+        <a href="#portfolio" onclick="toggleMobileMenu()">Портфолио</a>
+        <a href="#contact" onclick="toggleMobileMenu()">Контакты</a>
+        <a href="tel:+77059164337" style="color: var(--secondary);">+7 705 916 43 37</a>
+    </nav>
+    
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Ремонт корпусной мебели в Алматы</h1>
+                <p class="hero-subtitle">Профессиональный ремонт шкафов, кухонной мебели, замена фурнитуры и столешниц. Работаем по Алматы и области в радиусе 100 км. Бесплатный выезд на замер.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">
+                        <i data-lucide="ruler"></i>
+                        Заказать замер
+                    </a>
+                    <a href="tel:+77059164337" class="btn btn-outline">
+                        <i data-lucide="phone"></i>
+                        Позвонить
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services -->
+    <section class="section" id="services">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Наши услуги</h2>
+                <p class="section-subtitle">Полный комплекс услуг по ремонту и изготовлению корпусной мебели</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in" onclick="selectService('Ремонт шкафов')">
+                    <div class="service-icon">
+                        <i data-lucide="layout-grid"></i>
+                    </div>
+                    <h3>Ремонт шкафов</h3>
+                    <p>Ремонт раздвижных и распашных шкафов любой сложности. Восстановление направляющих, замена дверей, полная реставрация.</p>
+                </div>
+                <div class="service-card fade-in" onclick="selectService('Ремонт кухонной мебели')">
+                    <div class="service-icon">
+                        <i data-lucide="chef-hat"></i>
+                    </div>
+                    <h3>Ремонт кухонной мебели</h3>
+                    <p>Восстановление фасадов, замена петель, ремонт выдвижных ящиков и механизмов. Работаем с любыми материалами.</p>
+                </div>
+                <div class="service-card fade-in" onclick="selectService('Замена фурнитуры')">
+                    <div class="service-icon">
+                        <i data-lucide="settings"></i>
+                    </div>
+                    <h3>Замена фурнитуры</h3>
+                    <p>Установка новых ручек, петель, направляющих, доводчиков. Подбор качественной европейской фурнитуры.</p>
+                </div>
+                <div class="service-card fade-in" onclick="selectService('Замена столешниц')">
+                    <div class="service-icon">
+                        <i data-lucide="layers"></i>
+                    </div>
+                    <h3>Замена столешниц</h3>
+                    <p>Установка столешниц из ЛДСП, МДФ, искусственного и натурального камня. Точные замеры и идеальная подгонка.</p>
+                </div>
+                <div class="service-card fade-in" onclick="selectService('Врезка моек и техники')">
+                    <div class="service-icon">
+                        <i data-lucide="droplets"></i>
+                    </div>
+                    <h3>Врезка моек и техники</h3>
+                    <p>Профессиональная врезка кухонных моек, варочных панелей, вытяжек и другой встраиваемой техники.</p>
+                </div>
+                <div class="service-card fade-in" onclick="selectService('Изготовление мебели')">
+                    <div class="service-icon">
+                        <i data-lucide="package"></i>
+                    </div>
+                    <h3>Изготовление мебели</h3>
+                    <p>Изготовление корпусной мебели по индивидуальным размерам. Шкафы, кухни, гардеробные системы.</p>
+                </div>
+                <div class="service-card fade-in" onclick="selectService('Замер и дизайн')">
+                    <div class="service-icon">
+                        <i data-lucide="pencil-ruler"></i>
+                    </div>
+                    <h3>Замер и дизайн</h3>
+                    <p>Бесплатный выезд специалиста на замер. Разработка дизайн-проекта с 3D-визуализацией.</p>
+                </div>
+                <div class="service-card fade-in" onclick="selectService('Мелкий бытовой ремонт')">
+                    <div class="service-icon">
+                        <i data-lucide="wrench"></i>
+                    </div>
+                    <h3>Мелкий бытовой ремонт</h3>
+                    <p>Установка люстр, замена смесителей, навеска полок и картин. Мелкий ремонт по дому.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Why Us -->
+    <section class="section why-us" id="why-us">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Почему выбирают нас</h2>
+                <p class="section-subtitle">Более 10 лет опыта в ремонте корпусной мебели</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature fade-in">
+                    <div class="feature-icon">
+                        <i data-lucide="award"></i>
+                    </div>
+                    <h3>Опытные мастера</h3>
+                    <p>Наши специалисты имеют более 10 лет опыта в ремонте и изготовлении корпусной мебели</p>
+                </div>
+                <div class="feature fade-in">
+                    <div class="feature-icon">
+                        <i data-lucide="truck"></i>
+                    </div>
+                    <h3>Выезд на дом</h3>
+                    <p>Бесплатный выезд мастера на замер в пределах Алматы и 100 км области</p>
+                </div>
+                <div class="feature fade-in">
+                    <div class="feature-icon">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <h3>Гарантия качества</h3>
+                    <p>Предоставляем гарантию на все виды работ и используемые материалы</p>
+                </div>
+                <div class="feature fade-in">
+                    <div class="feature-icon">
+                        <i data-lucide="coins"></i>
+                    </div>
+                    <h3>Честные цены</h3>
+                    <p>Прозрачное ценообразование без скрытых платежей. Стоимость известна до начала работ</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Portfolio -->
+    <section class="section" id="portfolio">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Наши работы</h2>
+                <p class="section-subtitle">Примеры выполненных проектов по ремонту корпусной мебели</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80" alt="Ремонт кухни">
+                    <div class="portfolio-overlay">
+                        <h4>Ремонт кухонного гарнитура</h4>
+                        <span>Замена фасадов, установка новой фурнитуры</span>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=600&q=80" alt="Шкаф-купе">
+                    <div class="portfolio-overlay">
+                        <h4>Ремонт шкафа-купе</h4>
+                        <span>Замена направляющих, установка доводчиков</span>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1556909212-d5b604d0c90d?w=600&q=80" alt="Столешница">
+                    <div class="portfolio-overlay">
+                        <h4>Установка столешницы</h4>
+                        <span>Замена ЛДСП столешницы на искусственный камень</span>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&q=80" alt="Встроенная техника">
+                    <div class="portfolio-overlay">
+                        <h4>Врезка варочной панели</h4>
+                        <span>Установка и герметизация встроенной техники</span>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Гардеробная">
+                    <div class="portfolio-overlay">
+                        <h4>Изготовление гардеробной</h4>
+                        <span>Шкаф по индивидуальным размерам с системой хранения</span>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=600&q=80" alt="Ремонт комнаты">
+                    <div class="portfolio-overlay">
+                        <h4>Комплексный ремонт</h4>
+                        <span>Ремонт всей корпусной мебели в квартире</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Service Area -->
+    <section class="section service-area" id="area">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Зона обслуживания</h2>
+                <p class="section-subtitle">Работаем по Алматы и Алматинской области</p>
+            </div>
+            <div class="area-content">
+                <div class="fade-in">
+                    <h3 style="margin-bottom: 24px; color: white;">Районы Алматы</h3>
+                    <ul class="area-list">
+                        <li><i data-lucide="map-pin"></i> Бостандыкский район</li>
+                        <li><i data-lucide="map-pin"></i> Алмалинский район</li>
+                        <li><i data-lucide="map-pin"></i> Ауэзовский район</li>
+                        <li><i data-lucide="map-pin"></i> Медеуский район</li>
+                        <li><i data-lucide="map-pin"></i> Жетысуский район</li>
+                        <li><i data-lucide="map-pin"></i> Турксибский район</li>
+                        <li><i data-lucide="map-pin"></i> Наурызбайский район</li>
+                        <li><i data-lucide="map-pin"></i> Алатауский район</li>
+                    </ul>
+                </div>
+                <div class="area-map fade-in">
+                    <i data-lucide="map"></i>
+                    <p>Алматы + область<br>до 100 км</p>
+                    <p style="margin-top: 16px; font-size: 0.95rem; opacity: 0.8;">
+                        Более 50 пригородных населённых пунктов: Каскелен, Талгар, Есик, Чемолган, Бельбеде, Шелек и другие
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Свяжитесь с нами</h2>
+                <p class="section-subtitle">Оставьте заявку и мы перезвоним в течение 15 минут</p>
+            </div>
+            <div class="contact-wrapper">
+                <div class="contact-info fade-in">
+                    <h3>Контактная информация</h3>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <i data-lucide="phone"></i>
+                        </div>
+                        <div class="contact-item-text">
+                            <h4>Телефон</h4>
+                            <a href="tel:+77059164337">+7 705 916 43 37</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <i data-lucide="message-circle"></i>
+                        </div>
+                        <div class="contact-item-text">
+                            <h4>WhatsApp</h4>
+                            <a href="https://wa.me/77059164337?text=Здравствуйте! Интересует ремонт мебели.">+7 705 916 43 37</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <i data-lucide="mail"></i>
+                        </div>
+                        <div class="contact-item-text">
+                            <h4>Email</h4>
+                            <a href="mailto:info@re-fix.kz">info@re-fix.kz</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <i data-lucide="clock"></i>
+                        </div>
+                        <div class="contact-item-text">
+                            <h4>Режим работы</h4>
+                            <p>Пн-Сб: 9:00 - 20:00<br>Вс: по договорённости</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form fade-in" id="contactForm">
+                    <form id="form" onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <label for="name">Ваше имя</label>
+                            <input type="text" id="name" name="name" placeholder="Введите имя">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Телефон *</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+7 (708) 908-24-50" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Тип услуги</label>
+                            <select id="service" name="service">
+                                <option value="">Выберите услугу</option>
+                                <option value="Ремонт шкафов">Ремонт шкафов</option>
+                                <option value="Ремонт кухонной мебели">Ремонт кухонной мебели</option>
+                                <option value="Замена фурнитуры">Замена фурнитуры</option>
+                                <option value="Замена столешниц">Замена столешниц</option>
+                                <option value="Врезка моек и техники">Врезка моек и техники</option>
+                                <option value="Изготовление мебели">Изготовление мебели</option>
+                                <option value="Замер и дизайн">Замер и дизайн</option>
+                                <option value="Мелкий бытовой ремонт">Мелкий бытовой ремонт</option>
+                                <option value="Другое">Другое</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Сообщение</label>
+                            <textarea id="message" name="message" placeholder="Опишите вашу задачу..."></textarea>
+                        </div>
+                        <button type="submit" class="form-submit" id="submitBtn">
+                            Отправить заявку
+                        </button>
+                    </form>
+                    <div class="form-success" id="formSuccess">
+                        <i data-lucide="check-circle"></i>
+                        <h3>Заявка отправлена!</h3>
+                        <p>Мы перезвоним вам в течение 15 минут</p>
+                        <a href="https://wa.me/77059164337?text=Здравствуйте! Отправил заявку с сайта re-fix.kz" class="btn btn-primary" style="margin-top: 16px; display: inline-flex; text-decoration: none;" target="_blank">
+                            <i data-lucide="message-circle"></i>
+                            Написать в WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+            <a href="#" class="logo">
+                <img src="assets/logo.png" alt="Re-Fix — ремонт корпусной мебели">
+            </a>
+                    <p>Профессиональный ремонт корпусной мебели в Алматы и Алматинской области. Качество, надёжность, честные цены.</p>
+                </div>
+                <div>
+                    <h4>Услуги</h4>
+                    <ul class="footer-links">
+                        <li><a href="#services">Ремонт шкафов</a></li>
+                        <li><a href="#services">Ремонт кухонь</a></li>
+                        <li><a href="#services">Замена фурнитуры</a></li>
+                        <li><a href="#services">Изготовление мебели</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Компания</h4>
+                    <ul class="footer-links">
+                        <li><a href="#why-us">О нас</a></li>
+                        <li><a href="#portfolio">Портфолио</a></li>
+                        <li><a href="#area">Зона обслуживания</a></li>
+                        <li><a href="#contact">Контакты</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 re-fix.kz — Ремонт корпусной мебели в Алматы. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- AI Чат-мастер по ремонту мебели -->
+    <div id="chat-widget" style="display:none;">
+      <div id="chat-header">
+        <span>Онлайн мастер Re-Fix</span>
+        <button id="chat-close-btn" onclick="toggleChat()">&times;</button>
+      </div>
+      <div id="chat-messages"></div>
+      <div id="chat-input">
+        <input type="text" id="chat-user-input" placeholder="Опишите проблему с мебелью..." />
+        <button id="chat-send-btn">Отправить</button>
+      </div>
+    </div>
+    
+    <!-- Кнопка открытия чата -->
+    <button id="chat-toggle-btn" onclick="toggleChat()" style="display:none;">
+      <i data-lucide="message-circle"></i>
+    </button>
+
+    <style>
+      #chat-widget {
+        position: fixed;
+        bottom: 24px;
+        right: 96px;
+        width: 320px;
+        max-height: 420px;
+        background: #ffffff;
+        border: 1px solid #E0E0E0;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        font-family: 'Open Sans', system-ui, sans-serif;
+        font-size: 14px;
+        box-shadow: var(--shadow-lg);
+        z-index: 998;
+        overflow: hidden;
+      }
+      #chat-header {
+        padding: 8px 12px;
+        background: var(--secondary);
+        color: #fff;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      #chat-header span {
+        flex: 1;
+      }
+      #chat-close-btn {
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+        padding: 0 4px;
+        line-height: 1;
+      }
+      #chat-close-btn:hover {
+        opacity: 0.8;
+      }
+      #chat-toggle-btn {
+        position: fixed;
+        bottom: 24px;
+        right: 96px;
+        width: 60px;
+        height: 60px;
+        background: var(--whatsapp);
+        border-radius: 50%;
+        border: none;
+        color: white;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        box-shadow: var(--shadow-lg);
+        z-index: 997;
+      }
+      #chat-messages {
+        padding: 10px;
+        overflow-y: auto;
+        flex: 1;
+        background: #FAFAFA;
+      }
+      .chat-message { margin-bottom: 8px; }
+      .chat-message.user { text-align: right; }
+      .chat-message.assistant { text-align: left; }
+      #chat-input {
+        display: flex;
+        border-top: 1px solid #E0E0E0;
+        background: #fff;
+      }
+      #chat-user-input {
+        flex: 1;
+        border: none;
+        padding: 8px;
+        font-family: inherit;
+        font-size: 14px;
+      }
+      #chat-send-btn {
+        border: none;
+        padding: 0 12px;
+        background: var(--secondary);
+        color: #fff;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      @media (max-width: 768px) {
+        #chat-widget {
+          right: 0;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          max-height: 70vh;
+          border-radius: 10px 10px 0 0;
+        }
+        #chat-toggle-btn {
+          right: 16px;
+          bottom: 24px;
+        }
+      }
+    </style>
+    
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Mobile menu
+        function toggleMobileMenu() {
+            const mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.toggle('open');
+            document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+        }
+        
+        // Select service from card
+        function selectService(serviceName) {
+            const serviceSelect = document.getElementById('service');
+            serviceSelect.value = serviceName;
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Form handling
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const service = document.getElementById('service').value;
+            const message = document.getElementById('message').value;
+            
+            const phoneValue = phone.replace(/\D/g, '');
+            
+            if (phoneValue.length < 10) {
+                document.getElementById('phone').classList.add('error');
+                return;
+            }
+            
+            document.getElementById('phone').classList.remove('error');
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Отправка...';
+            
+            setTimeout(() => {
+                const whatsappMessage = encodeURIComponent(
+                    `Здравствуйте! Заявка с сайта re-fix.kz:\n\n` +
+                    `Имя: ${name || 'не указано'}\n` +
+                    `Телефон: ${phone}\n` +
+                    `Услуга: ${service || 'не указана'}\n` +
+                    `Сообщение: ${message || 'нет'}`
+                );
+                
+                window.open(`https://wa.me/77059164337?text=${whatsappMessage}`, '_blank');
+                
+                document.getElementById('form').reset();
+                document.getElementById('formSuccess').classList.add('show');
+                lucide.createIcons();
+                
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Отправить заявку';
+            }, 1000);
+        }
+        
+        // Phone input mask for Kazakhstan (+7)
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            let formatted = '';
+            
+            // Kazakhstan format: +7 (XXX) XXX-XX-XX
+            if (value.length > 0) formatted = '+' + value.substring(0, 1);
+            if (value.length > 1) formatted += ' (' + value.substring(1, 4);
+            if (value.length > 4) formatted += ') ' + value.substring(4, 7);
+            if (value.length > 7) formatted += '-' + value.substring(7, 9);
+            if (value.length > 9) formatted += '-' + value.substring(9, 11);
+            
+            e.target.value = formatted;
+        });
+        
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+
+    <!-- AI мастер через Portkey -->
+    <script>
+      const chatMessagesEl = document.getElementById("chat-messages");
+      const chatInputEl = document.getElementById("chat-user-input");
+      const chatSendBtn = document.getElementById("chat-send-btn");
+      const chatWidget = document.getElementById("chat-widget");
+      const chatToggleBtn = document.getElementById("chat-toggle-btn");
+
+      // История диалога для передачи контекста в AI
+      const chatHistory = [];
+
+      function toggleChat() {
+        if (chatWidget.style.display === "none" || chatWidget.style.display === "") {
+          chatWidget.style.display = "flex";
+          chatToggleBtn.style.display = "none";
+        } else {
+          chatWidget.style.display = "none";
+          chatToggleBtn.style.display = "flex";
+        }
+      }
+
+      function addChatMessage(text, role) {
+        const div = document.createElement("div");
+        div.className = "chat-message " + role;
+        div.textContent = text;
+        chatMessagesEl.appendChild(div);
+        chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+      }
+
+      async function sendChatMessage() {
+        const userText = chatInputEl.value.trim();
+        if (!userText) return;
+
+        // Добавляем сообщение пользователя в историю и UI
+        chatHistory.push({ role: "user", content: userText });
+        addChatMessage(userText, "user");
+        chatInputEl.value = "";
+        chatSendBtn.disabled = true;
+
+        const thinkingMsg = "Мастер думает над вариантом ремонта...";
+        addChatMessage(thinkingMsg, "assistant");
+
+        try {
+          const response = await fetch("https://re-fix-kz.onrender.com/api/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            // Передаём всю историю диалога, а не только последнее сообщение
+            body: JSON.stringify({ messages: chatHistory })
+          });
+
+          const data = await response.json();
+
+          const lastAssistant = chatMessagesEl.querySelector(".chat-message.assistant:last-child");
+          if (lastAssistant && lastAssistant.textContent === thinkingMsg) lastAssistant.remove();
+
+          const reply = data.reply || "Не удалось получить ответ мастера. Попробуйте ещё раз позже.";
+
+          // Сохраняем ответ AI в историю
+          chatHistory.push({ role: "assistant", content: reply });
+          addChatMessage(reply, "assistant");
+        } catch (err) {
+          const lastAssistant = chatMessagesEl.querySelector(".chat-message.assistant:last-child");
+          if (lastAssistant && lastAssistant.textContent === thinkingMsg) lastAssistant.remove();
+          addChatMessage("Ошибка подключения к мастеру. Попробуйте ещё раз.", "assistant");
+          console.error(err);
+        } finally {
+          chatSendBtn.disabled = false;
+        }
+      }
+
+      chatSendBtn.addEventListener("click", sendChatMessage);
+      chatInputEl.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") sendChatMessage();
+      });
+      
+      addChatMessage("Здравствуйте! 👋 Я онлайн-мастер Re-Fix. Опишите вашу проблему или задайте вопрос о ремонте мебели. Ответим за 2 минуты!", "assistant");
+    </script>
+</body>
+</html>
