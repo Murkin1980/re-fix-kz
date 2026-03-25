@@ -1122,13 +1122,21 @@
     
     <!-- AI Чат-мастер по ремонту мебели -->
     <div id="chat-widget">
-      <div id="chat-header">Онлайн мастер Re-Fix</div>
+      <div id="chat-header">
+        <span>Онлайн мастер Re-Fix</span>
+        <button id="chat-close-btn" onclick="toggleChat()">&times;</button>
+      </div>
       <div id="chat-messages"></div>
       <div id="chat-input">
         <input type="text" id="chat-user-input" placeholder="Опишите проблему с мебелью..." />
         <button id="chat-send-btn">Отправить</button>
       </div>
     </div>
+    
+    <!-- Кнопка открытия чата -->
+    <button id="chat-toggle-btn" onclick="toggleChat()" style="display:none;">
+      <i data-lucide="message-circle"></i>
+    </button>
 
     <style>
       #chat-widget {
@@ -1153,6 +1161,41 @@
         background: var(--secondary);
         color: #fff;
         font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      #chat-header span {
+        flex: 1;
+      }
+      #chat-close-btn {
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+        padding: 0 4px;
+        line-height: 1;
+      }
+      #chat-close-btn:hover {
+        opacity: 0.8;
+      }
+      #chat-toggle-btn {
+        position: fixed;
+        bottom: 24px;
+        right: 96px;
+        width: 60px;
+        height: 60px;
+        background: var(--whatsapp);
+        border-radius: 50%;
+        border: none;
+        color: white;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        box-shadow: var(--shadow-lg);
+        z-index: 997;
       }
       #chat-messages {
         padding: 10px;
@@ -1185,10 +1228,16 @@
       }
       @media (max-width: 768px) {
         #chat-widget {
+          right: 0;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          max-height: 70vh;
+          border-radius: 10px 10px 0 0;
+        }
+        #chat-toggle-btn {
           right: 16px;
-          left: 16px;
-          width: auto;
-          max-height: 60vh;
+          bottom: 24px;
         }
       }
     </style>
@@ -1312,6 +1361,18 @@
       const chatMessagesEl = document.getElementById("chat-messages");
       const chatInputEl = document.getElementById("chat-user-input");
       const chatSendBtn = document.getElementById("chat-send-btn");
+      const chatWidget = document.getElementById("chat-widget");
+      const chatToggleBtn = document.getElementById("chat-toggle-btn");
+
+      function toggleChat() {
+        if (chatWidget.style.display === "none") {
+          chatWidget.style.display = "flex";
+          chatToggleBtn.style.display = "none";
+        } else {
+          chatWidget.style.display = "none";
+          chatToggleBtn.style.display = "flex";
+        }
+      }
 
       function addChatMessage(text, role) {
         const div = document.createElement("div");
