@@ -1340,5 +1340,88 @@
         
         addMessage('Здравствуйте! 👋 Я онлайн-мастер Re-Fix. Опишите вашу проблему или задайте вопрос о ремонте мебели. Ответим за 2 минуты!', 'assistant');
     </script>
+
+    <!-- AI мастер через Portkey -->
+    <script>
+      // ===== НАСТРОЙКИ PORTKEY =====
+      const PORTKEY_API_URL = "https://api.portkey.ai/v1/chat/completions";
+      const PORTKEY_API_KEY = "VLURN8YWIaaujEILy7Mz/RapEopq";        
+      const PORTKEY_PROVIDER = "google-ai";                  
+      const PORTKEY_MODEL = "gemini-1.5-flash";              
+
+      const chatMessagesEl = document.getElementById("chat-messages");
+      const chatInputEl = document.getElementById("chat-user-input");
+      const chatSendBtn = document.getElementById("chat-send-btn");
+
+      function addChatMessage(text, role) {
+        const div = document.createElement("div");
+        div.className = "chat-message " + role;
+        div.textContent = text;
+        chatMessagesEl.appendChild(div);
+        chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+      }
+
+      async function sendChatMessage() {
+        const userText = chatInputEl.value.trim();
+        if (!userText) return;
+
+        addChatMessage(userText, "user");
+        chatInputEl.value = "";
+
+        const thinkingMsg = "Мастер думает над вариантом ремонта...";
+        addChatMessage(thinkingMsg, "assistant");
+
+        try {
+          const body = {
+            model: PORTKEY_MODEL,
+            messages: [
+              {
+                role: "system",
+                content:
+                  "Ты опытный мастер по ремонту корпусной мебели в Алматы. " +
+                  "Выясняй детали: тип мебели, материал, возраст, район, этаж, есть ли лифт. " +
+                  "Отвечай простым языком, коротко, предлагай примерный порядок цен и " +
+                  "предлагай клиенту оставить номер телефона или позвонить по номеру +7 708 908 24 50."
+              },
+              { role: "user", content: userText }
+            ]
+          };
+
+          const response = await fetch(PORTKEY_API_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer " + PORTKEY_API_KEY,
+              "x-portkey-provider": PORTKEY_PROVIDER
+            },
+            body: JSON.stringify(body)
+          });
+
+          const data = await response.json();
+
+          const lastAssistant = chatMessagesEl.querySelector(".chat-message.assistant:last-child");
+          if (lastAssistant && lastAssistant.textContent === thinkingMsg) lastAssistant.remove();
+
+          const reply =
+            (data.choices &&
+              data.choices &&
+              data.choices.message &&
+              data.choices.message.content) ||
+            "Не удалось получить ответ мастера. Попробуйте ещё раз позже.";
+
+          addChatMessage(reply, "assistant");
+        } catch (err) {
+          const lastAssistant = chatMessagesEl.querySelector(".chat-message.assistant:last-child");
+          if (lastAssistant && lastAssistant.textContent === thinkingMsg) lastAssistant.remove();
+          addChatMessage("Ошибка подключения к мастеру. Попробуйте ещё раз.", "assistant");
+          console.error(err);
+        }
+      }
+
+      chatSendBtn.addEventListener("click", sendChatMessage);
+      chatInputEl.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") sendChatMessage();
+      });
+    </script>
 </body>
 </html>
