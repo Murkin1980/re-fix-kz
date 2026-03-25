@@ -1075,6 +1075,10 @@
                         <i data-lucide="check-circle"></i>
                         <h3>Заявка отправлена!</h3>
                         <p>Мы перезвоним вам в течение 15 минут</p>
+                        <a href="https://wa.me/77059164337?text=Здравствуйте! Отправил заявку с сайта re-fix.kz" class="btn btn-primary" style="margin-top: 16px; display: inline-flex; text-decoration: none;" target="_blank">
+                            <i data-lucide="message-circle"></i>
+                            Написать в WhatsApp
+                        </a>
                     </div>
                 </div>
             </div>
@@ -1221,25 +1225,40 @@
         function handleSubmit(event) {
             event.preventDefault();
             
-            const phone = document.getElementById('phone');
-            const phoneValue = phone.value.replace(/\D/g, '');
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const service = document.getElementById('service').value;
+            const message = document.getElementById('message').value;
+            
+            const phoneValue = phone.replace(/\D/g, '');
             
             if (phoneValue.length < 10) {
-                phone.classList.add('error');
+                document.getElementById('phone').classList.add('error');
                 return;
             }
             
-            phone.classList.remove('error');
+            document.getElementById('phone').classList.remove('error');
             
             const submitBtn = document.getElementById('submitBtn');
             submitBtn.disabled = true;
             submitBtn.textContent = 'Отправка...';
             
             setTimeout(() => {
-                document.getElementById('form').style.display = 'none';
+                const whatsappMessage = `Здравствуйте! Заявка с сайта re-fix.kz:%0A%0A` +
+                    `Имя: ${name || 'не указано'}%0A` +
+                    `Телефон: ${phone}%0A` +
+                    `Услуга: ${service || 'не указана'}%0A` +
+                    `Сообщение: ${message || 'нет'}`;
+                
+                window.open(`https://wa.me/77059164337?text=${whatsappMessage}`, '_blank');
+                
+                document.getElementById('form').reset();
                 document.getElementById('formSuccess').classList.add('show');
                 lucide.createIcons();
-            }, 1500);
+                
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Отправить заявку';
+            }, 1000);
         }
         
         // Phone input mask for Kazakhstan (+7)
