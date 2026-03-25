@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="re-fix.kz — Ремонт корпусной мебели в Алматы. Услуги замера, ремонта и изготовления мебели.">
+    <meta name="theme-color" content="#2C3E50">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>re-fix.kz — Ремонт мебели</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        :root {
+            --primary: #2C3E50;
+            --secondary: #E67E22;
+            --background: #FAFAFA;
+            --whatsapp: #25D366;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+            --radius-sm: 8px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', system-ui, sans-serif;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--primary) 35%, var(--background) 35%);
+            min-height: 100vh;
+            color: var(--primary);
+        }
+        
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Profile Section */
+        .profile {
+            text-align: center;
+            padding: 40px 0 30px;
+            color: white;
+        }
+        
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .avatar i {
+            width: 50px;
+            height: 50px;
+        }
+        
+        .profile h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .profile p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+        
+        /* Links Section */
+        .links {
+            padding: 20px 0 40px;
+        }
+        
+        .link-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: white;
+            padding: 16px 20px;
+            border-radius: var(--radius);
+            margin-bottom: 12px;
+            text-decoration: none;
+            color: var(--primary);
+            box-shadow: var(--shadow);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .link-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .link-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .link-icon.phone {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .link-icon.whatsapp {
+            background: var(--whatsapp);
+            color: white;
+        }
+        
+        .link-icon.services {
+            background: rgba(230, 126, 34, 0.15);
+            color: var(--secondary);
+        }
+        
+        .link-icon.measurement {
+            background: rgba(44, 62, 80, 0.1);
+            color: var(--primary);
+        }
+        
+        .link-icon.location {
+            background: rgba(39, 174, 96, 0.15);
+            color: #27AE60;
+        }
+        
+        .link-icon.telegram {
+            background: #229ED9;
+            color: white;
+        }
+        
+        .link-icon.instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+        }
+        
+        .link-text {
+            flex: 1;
+        }
+        
+        .link-text h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        
+        .link-text span {
+            font-size: 0.85rem;
+            color: #7F8C8D;
+        }
+        
+        .link-arrow {
+            color: #BDC3C7;
+        }
+        
+        /* Services List */
+        .services-section {
+            background: white;
+            border-radius: var(--radius);
+            margin-bottom: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .services-header {
+            padding: 16px 20px;
+            background: rgba(230, 126, 34, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+        
+        .services-header-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--secondary);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .services-header h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .services-list {
+            padding: 0 20px 16px;
+        }
+        
+        .service-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid #F0F0F0;
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+        
+        .service-item:last-child {
+            border-bottom: none;
+        }
+        
+        .service-item i {
+            width: 16px;
+            height: 16px;
+            color: var(--secondary);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #7F8C8D;
+            font-size: 0.85rem;
+        }
+        
+        .footer a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+        
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Profile -->
+        <div class="profile">
+            <div class="avatar">
+                <i data-lucide="wrench"></i>
+            </div>
+            <h1>re-fix.kz</h1>
+            <p>Ремонт корпусной мебели</p>
+            <p>Алматы и область</p>
+        </div>
+        
+        <!-- Links -->
+        <div class="links">
+            <a href="tel:+77089082450" class="link-card">
+                <div class="link-icon phone">
+                    <i data-lucide="phone"></i>
+                </div>
+                <div class="link-text">
+                    <h3>Позвонить</h3>
+                    <span>+7 708 908 24 50</span>
+                </div>
+                <i data-lucide="chevron-right" class="link-arrow"></i>
+            </a>
+            
+            <a href="https://wa.me/77089082450?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B5%D0%BC%D0%BE%D0%BD%D1%82%20%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D0%B8." class="link-card">
+                <div class="link-icon whatsapp">
+                    <i data-lucide="message-circle"></i>
+                </div>
+                <div class="link-text">
+                    <h3>WhatsApp</h3>
+                    <span>Написать в мессенджер</span>
+                </div>
+                <i data-lucide="chevron-right" class="link-arrow"></i>
+            </a>
+            
+            <a href="https://t.me/+77089082450" class="link-card">
+                <div class="link-icon telegram">
+                    <i data-lucide="send"></i>
+                </div>
+                <div class="link-text">
+                    <h3>Telegram</h3>
+                    <span>Быстрые ответы</span>
+                </div>
+                <i data-lucide="chevron-right" class="link-arrow"></i>
+            </a>
+            
+            <a href="https://www.instagram.com/re.fix.kz" class="link-card" target="_blank" rel="noopener">
+                <div class="link-icon instagram">
+                    <i data-lucide="instagram"></i>
+                </div>
+                <div class="link-text">
+                    <h3>Instagram</h3>
+                    <span>@re.fix.kz</span>
+                </div>
+                <i data-lucide="external-link" class="link-arrow"></i>
+            </a>
+            
+            <!-- Services Accordion -->
+            <div class="services-section">
+                <div class="services-header">
+                    <div class="services-header-icon">
+                        <i data-lucide="list"></i>
+                    </div>
+                    <h3>Наши услуги</h3>
+                </div>
+                <div class="services-list">
+                    <div class="service-item">
+                        <i data-lucide="check"></i>
+                        Ремонт шкафов и кухонной мебели
+                    </div>
+                    <div class="service-item">
+                        <i data-lucide="check"></i>
+                        Замена фурнитуры и столешниц
+                    </div>
+                    <div class="service-item">
+                        <i data-lucide="check"></i>
+                        Врезка моек и встраиваемой техники
+                    </div>
+                    <div class="service-item">
+                        <i data-lucide="check"></i>
+                        Изготовление мебели на заказ
+                    </div>
+                    <div class="service-item">
+                        <i data-lucide="check"></i>
+                        Замер и дизайн-проект
+                    </div>
+                    <div class="service-item">
+                        <i data-lucide="check"></i>
+                        Мелкий бытовой ремонт
+                    </div>
+                </div>
+            </div>
+            
+            <a href="https://murkin1980.github.io/re-fix-kz/" class="link-card" target="_blank" rel="noopener">
+                <div class="link-icon services">
+                    <i data-lucide="globe"></i>
+                </div>
+                <div class="link-text">
+                    <h3>Наш сайт</h3>
+                    <span>Все услуги и портфолио</span>
+                </div>
+                <i data-lucide="external-link" class="link-arrow"></i>
+            </a>
+            
+            <a href="#" class="link-card" onclick="alert('Адрес: г. Алматы\nКаскеленское шоссе, 15\nРаботаем по всему городу и области'); return false;">
+                <div class="link-icon location">
+                    <i data-lucide="map-pin"></i>
+                </div>
+                <div class="link-text">
+                    <h3>Адрес</h3>
+                    <span>Алматы + область до 100 км</span>
+                </div>
+                <i data-lucide="chevron-right" class="link-arrow"></i>
+            </a>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2025 <a href="https://murkin1980.github.io/re-fix-kz/">re-fix.kz</a></p>
+            <p style="margin-top: 4px;">Ремонт корпусной мебели в Алматы</p>
+        </div>
+    </div>
+    
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
