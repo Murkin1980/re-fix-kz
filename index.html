@@ -1116,10 +1116,78 @@
         </div>
     </footer>
     
-    <!-- WhatsApp Button -->
-    <a href="https://wa.me/77089082450?text=Здравствуйте! Интересует ремонт мебели." class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
-        <i data-lucide="message-circle"></i>
-    </a>
+    <!-- AI Чат-мастер по ремонту мебели -->
+    <div id="chat-widget">
+      <div id="chat-header">Онлайн мастер Re-Fix</div>
+      <div id="chat-messages"></div>
+      <div id="chat-input">
+        <input type="text" id="chat-user-input" placeholder="Опишите проблему с мебелью..." />
+        <button id="chat-send-btn">Отправить</button>
+      </div>
+    </div>
+
+    <style>
+      #chat-widget {
+        position: fixed;
+        bottom: 24px;
+        right: 96px;
+        width: 320px;
+        max-height: 420px;
+        background: #ffffff;
+        border: 1px solid #E0E0E0;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        font-family: 'Open Sans', system-ui, sans-serif;
+        font-size: 14px;
+        box-shadow: var(--shadow-lg);
+        z-index: 998;
+        overflow: hidden;
+      }
+      #chat-header {
+        padding: 8px 12px;
+        background: var(--secondary);
+        color: #fff;
+        font-weight: 600;
+      }
+      #chat-messages {
+        padding: 10px;
+        overflow-y: auto;
+        flex: 1;
+        background: #FAFAFA;
+      }
+      .chat-message { margin-bottom: 8px; }
+      .chat-message.user { text-align: right; }
+      .chat-message.assistant { text-align: left; }
+      #chat-input {
+        display: flex;
+        border-top: 1px solid #E0E0E0;
+        background: #fff;
+      }
+      #chat-user-input {
+        flex: 1;
+        border: none;
+        padding: 8px;
+        font-family: inherit;
+        font-size: 14px;
+      }
+      #chat-send-btn {
+        border: none;
+        padding: 0 12px;
+        background: var(--secondary);
+        color: #fff;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      @media (max-width: 768px) {
+        #chat-widget {
+          right: 16px;
+          left: 16px;
+          width: auto;
+          max-height: 60vh;
+        }
+      }
+    </style>
     
     <script>
         // Initialize Lucide icons
@@ -1218,6 +1286,59 @@
                 }
             });
         });
+        
+        // Chat Widget
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-user-input');
+        const chatSendBtn = document.getElementById('chat-send-btn');
+        
+        const services = {
+            'ремонт шкафов': 'Ремонт шкафов — наша специализация! Восстанавливаем раздвижные и распашные системы. Стоимость от 5000 ₸. Выезд мастера бесплатно. Запишитесь на замер!',
+            'ремонт кухни': 'Ремонт кухонной мебели включает: восстановление фасадов, замену петель и выдвижных механизмов. Работаем с ЛДСП, МДФ, массивом. Звоните!',
+            'фурнитура': 'Замена фурнитуры: ручки, петли, направляющие, доводчики. Используем европейские бренды (Blum, Hettich). Гарантия 2 года.',
+            'столешница': 'Устанавливаем столешницы из ЛДСП, МДФ, искусственного и натурального камня. Точные замеры, качественная подгонка. Цены от 15000 ₸.',
+            'врезка': 'Врезка моек, варочных панелей, вытяжек. Герметизация, установка встроенной техники. Профессиональный инструмент, аккуратная работа.',
+            'изготовление': 'Изготавливаем корпусную мебель по индивидуальным размерам: кухни, шкафы, гардеробные. Дизайн-проект в подарок!',
+            'замер': 'Бесплатный выезд на замер по Алматы и области (до 100 км). 3D-визуализация вашей будущей мебели.',
+            'бытовой': 'Мелкий бытовой ремонт: установка люстр, замена смесителей, навеска полок. Мастер приедет в удобное время.'
+        };
+        
+        function addMessage(text, type) {
+            const msg = document.createElement('div');
+            msg.className = 'chat-message ' + type;
+            msg.textContent = text;
+            chatMessages.appendChild(msg);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        function getBotResponse(input) {
+            input = input.toLowerCase();
+            for (const [key, response] of Object.entries(services)) {
+                if (input.includes(key)) {
+                    return response;
+                }
+            }
+            return 'Спасибо за вопрос! Для точного ответа позвоните: +7 708 908 24 50. Или опишите подробнее вашу задачу — поможем с ремонтом мебели!';
+        }
+        
+        function sendMessage() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+            
+            addMessage(text, 'user');
+            chatInput.value = '';
+            
+            setTimeout(() => {
+                addMessage(getBotResponse(text), 'assistant');
+            }, 500);
+        }
+        
+        chatSendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+        
+        addMessage('Здравствуйте! 👋 Я онлайн-мастер Re-Fix. Опишите вашу проблему или задайте вопрос о ремонте мебели. Ответим за 2 минуты!', 'assistant');
     </script>
 </body>
 </html>
