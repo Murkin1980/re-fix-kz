@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '..')));
+app.use(express.static(__dirname));
 
 const PORTKEY_API_URL = 'https://api.portkey.ai/v1/chat/completions';
 const PORTKEY_API_KEY = process.env.PORTKEY_API_KEY || 'VLURN8YWIaaujEILy7Mz/RapEopq';
@@ -53,7 +53,7 @@ app.post('/api/chat', async (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(PORT, () => {
