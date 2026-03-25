@@ -1404,7 +1404,7 @@
           const lastAssistant = chatMessagesEl.querySelector(".chat-message.assistant:last-child");
           if (lastAssistant && lastAssistant.textContent === thinkingMsg) lastAssistant.remove();
 
-          const reply = data.choices?.[0]?.message?.content || "Не удалось получить ответ мастера. Попробуйте ещё раз позже.";
+          const reply = data.reply || "Не удалось получить ответ мастера. Попробуйте ещё раз позже.";
           addChatMessage(reply, "assistant");
         } catch (err) {
           const lastAssistant = chatMessagesEl.querySelector(".chat-message.assistant:last-child");
