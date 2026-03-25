@@ -1120,16 +1120,17 @@
         </div>
     </footer>
     
-    <!-- AI Чат-мастер по ремонту мебели -->
+    <!-- Чат-мастер Re-Fix -->
     <div id="chat-widget" style="display:none;">
       <div id="chat-header">
-        <span>Онлайн мастер Re-Fix</span>
+        <span>🔧 Мастер Re-Fix</span>
         <button id="chat-close-btn" onclick="toggleChat()">&times;</button>
       </div>
       <div id="chat-messages"></div>
-      <div id="chat-input">
-        <input type="text" id="chat-user-input" placeholder="Опишите проблему с мебелью..." />
-        <button id="chat-send-btn">Отправить</button>
+      <div id="chat-buttons"></div>
+      <div id="chat-phone-input" style="display:none;">
+        <input type="tel" id="chat-phone" placeholder="+7 (___) ___-__-__" />
+        <button id="chat-phone-send">Отправить</button>
       </div>
     </div>
     
@@ -1143,11 +1144,11 @@
         position: fixed;
         bottom: 24px;
         right: 96px;
-        width: 320px;
-        max-height: 420px;
+        width: 330px;
+        max-height: 500px;
         background: #ffffff;
         border: 1px solid #E0E0E0;
-        border-radius: 10px;
+        border-radius: 12px;
         display: flex;
         flex-direction: column;
         font-family: 'Open Sans', system-ui, sans-serif;
@@ -1157,36 +1158,35 @@
         overflow: hidden;
       }
       #chat-header {
-        padding: 8px 12px;
-        background: var(--secondary);
+        padding: 10px 14px;
+        background: var(--primary);
         color: #fff;
         font-weight: 600;
+        font-size: 15px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-shrink: 0;
       }
-      #chat-header span {
-        flex: 1;
-      }
+      #chat-header span { flex: 1; }
       #chat-close-btn {
         background: none;
         border: none;
         color: #fff;
-        font-size: 20px;
+        font-size: 22px;
         cursor: pointer;
         padding: 0 4px;
         line-height: 1;
+        opacity: 0.85;
       }
-      #chat-close-btn:hover {
-        opacity: 0.8;
-      }
+      #chat-close-btn:hover { opacity: 1; }
       #chat-toggle-btn {
         position: fixed;
         bottom: 24px;
         right: 96px;
         width: 60px;
         height: 60px;
-        background: var(--whatsapp);
+        background: var(--primary);
         border-radius: 50%;
         border: none;
         color: white;
@@ -1196,49 +1196,96 @@
         justify-content: center;
         box-shadow: var(--shadow-lg);
         z-index: 997;
+        transition: background 200ms;
       }
+      #chat-toggle-btn:hover { background: var(--secondary); }
       #chat-messages {
-        padding: 10px;
+        padding: 12px;
         overflow-y: auto;
         flex: 1;
-        background: #FAFAFA;
+        background: #F5F6FA;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
       }
-      .chat-message { margin-bottom: 8px; }
-      .chat-message.user { text-align: right; }
-      .chat-message.assistant { text-align: left; }
-      #chat-input {
+      .chat-bubble {
+        max-width: 85%;
+        padding: 9px 13px;
+        border-radius: 12px;
+        line-height: 1.45;
+        word-break: break-word;
+        white-space: pre-wrap;
+      }
+      .chat-bubble.bot {
+        background: #fff;
+        border: 1px solid #E0E0E0;
+        color: var(--text-primary);
+        align-self: flex-start;
+        border-bottom-left-radius: 3px;
+      }
+      .chat-bubble.user {
+        background: var(--secondary);
+        color: #fff;
+        align-self: flex-end;
+        border-bottom-right-radius: 3px;
+      }
+      #chat-buttons {
+        padding: 8px 12px 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        background: #fff;
+        border-top: 1px solid #EFEFEF;
+        flex-shrink: 0;
+      }
+      .chat-btn {
+        background: #fff;
+        border: 1.5px solid var(--secondary);
+        color: var(--secondary);
+        border-radius: 20px;
+        padding: 6px 13px;
+        font-size: 13px;
+        font-family: inherit;
+        cursor: pointer;
+        transition: all 150ms;
+        font-weight: 500;
+      }
+      .chat-btn:hover {
+        background: var(--secondary);
+        color: #fff;
+      }
+      #chat-phone-input {
         display: flex;
         border-top: 1px solid #E0E0E0;
         background: #fff;
+        flex-shrink: 0;
       }
-      #chat-user-input {
+      #chat-phone {
         flex: 1;
         border: none;
-        padding: 8px;
+        padding: 10px 12px;
         font-family: inherit;
         font-size: 14px;
+        outline: none;
       }
-      #chat-send-btn {
+      #chat-phone-send {
         border: none;
-        padding: 0 12px;
+        padding: 0 16px;
         background: var(--secondary);
         color: #fff;
         cursor: pointer;
         font-weight: 600;
+        font-size: 13px;
+        transition: background 150ms;
       }
+      #chat-phone-send:hover { background: #D35400; }
       @media (max-width: 768px) {
         #chat-widget {
-          right: 0;
-          left: 0;
-          bottom: 0;
-          width: 100%;
-          max-height: 70vh;
-          border-radius: 10px 10px 0 0;
+          right: 0; left: 0; bottom: 0;
+          width: 100%; max-height: 75vh;
+          border-radius: 14px 14px 0 0;
         }
-        #chat-toggle-btn {
-          right: 16px;
-          bottom: 24px;
-        }
+        #chat-toggle-btn { right: 16px; bottom: 24px; }
       }
     </style>
     
@@ -1358,82 +1405,227 @@
         });
     </script>
 
-    <!-- AI мастер через Portkey -->
+    <!-- Сценарный чат-бот Re-Fix -->
     <script>
-      const chatMessagesEl = document.getElementById("chat-messages");
-      const chatInputEl = document.getElementById("chat-user-input");
-      const chatSendBtn = document.getElementById("chat-send-btn");
-      const chatWidget = document.getElementById("chat-widget");
-      const chatToggleBtn = document.getElementById("chat-toggle-btn");
+    (function() {
+      const messagesEl = document.getElementById('chat-messages');
+      const buttonsEl  = document.getElementById('chat-buttons');
+      const phoneWrap  = document.getElementById('chat-phone-input');
+      const phoneInput = document.getElementById('chat-phone');
+      const phoneSend  = document.getElementById('chat-phone-send');
+      const widget     = document.getElementById('chat-widget');
+      const toggleBtn  = document.getElementById('chat-toggle-btn');
 
-      // История диалога для передачи контекста в AI
-      const chatHistory = [];
+      // ===== ДАННЫЕ О УСЛУГАХ И ЦЕНАХ =====
+      const SERVICES = [
+        {
+          id: 'hinges',
+          name: 'Замена / регулировка петель',
+          info: 'Регулировка петель (косметич.) — от 3 000 ₸
+Замена петли (1 шт.) — от 5 000 ₸
+Замена петель шкафа-купе (1 дв.) — от 8 000 ₸
+Замена доводчиков (2 шт.) — от 6 000 ₸',
+          question: 'Сколько петель нужно отремонтировать?',
+          options: ['Одна-две', 'Три-пять', 'Больше пяти']
+        },
+        {
+          id: 'kitchen',
+          name: 'Ремонт кухни',
+          info: 'Замена фасада (1 шт.) — от 8 000 ₸
+Ремонт ящика (направляющие) — от 4 000 ₸
+Замена столешницы ЛДСП — от 15 000 ₸
+Замена столешницы из камня — от 35 000 ₸
+Комплексный ремонт гарнитура — от 25 000 ₸',
+          question: 'Что конкретно нужно отремонтировать?',
+          options: ['Фасады', 'Ящики', 'Столешницу', 'Всё сразу']
+        },
+        {
+          id: 'wardrobe',
+          name: 'Ремонт шкафа',
+          info: 'Регулировка дверей (косметич.) — от 3 000 ₸
+Замена направляющих купе (1 дв.) — от 7 000 ₸
+Ремонт распашного шкафа — от 10 000 ₸
+Изготовление по размерам — от 80 000 ₸',
+          question: 'Какой шкаф?',
+          options: ['Шкаф-купе', 'Распашной', 'Гардеробная система']
+        },
+        {
+          id: 'sink',
+          name: 'Врезка мойки / техники',
+          info: 'Врезка кухонной мойки — от 8 000 ₸
+Врезка варочной панели — от 10 000 ₸
+Установка вытяжки — от 5 000 ₸
+Герметизация в подарок — от 3 000 ₸',
+          question: 'Что нужно встроить?',
+          options: ['Мойку', 'Варочную панель', 'Вытяжку']
+        },
+        {
+          id: 'hardware',
+          name: 'Замена фурнитуры',
+          info: 'Замена ручек (1 шт.) — от 1 500 ₸
+Замена направляющих ящика (1 шт.) — от 4 000 ₸
+Замена подъёмного механизма — от 6 000 ₸
+Замена амортизатора (1 шт.) — от 5 000 ₸',
+          question: 'Какая фурнитура?',
+          options: ['Ручки', 'Направляющие', 'Подъёмные механизмы', 'Амортизаторы']
+        },
+        {
+          id: 'small',
+          name: 'Мелкий ремонт',
+          info: 'Навеска полки / картины — от 3 000 ₸
+Замена смесителя — от 5 000 ₸
+Установка люстры — от 5 000 ₸
+Мелкий ремонт по дому (оценка на месте) — от 8 000 ₸',
+          question: 'Что нужно?',
+          options: ['Навесить полку', 'Заменить смеситель', 'Повесить люстру', 'Другое']
+        },
+        {
+          id: 'custom',
+          name: 'Изготовление мебели',
+          info: 'Шкаф по размерам — от 80 000 ₸
+Кухня на заказ — от 150 000 ₸
+Гардеробная — от 100 000 ₸
+Бесплатный замер и 3D-проект — входит в стоимость',
+          question: 'Что нужно изготовить?',
+          options: ['Шкаф', 'Кухню', 'Гардеробную', 'Другое']
+        }
+      ];
 
+      // ===== СОСТОЯНИЕ =====
+      let state = { step: 'start', service: null, detail: null };
+      const WA_NUMBER = '77059164337';
+
+      // ===== UI ФУНКЦИИ =====
+      function bubble(text, who) {
+        const d = document.createElement('div');
+        d.className = 'chat-bubble ' + who;
+        d.textContent = text;
+        messagesEl.appendChild(d);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      }
+
+      function setButtons(labels, onClick) {
+        buttonsEl.innerHTML = '';
+        phoneWrap.style.display = 'none';
+        labels.forEach(label => {
+          const btn = document.createElement('button');
+          btn.className = 'chat-btn';
+          btn.textContent = label;
+          btn.onclick = () => onClick(label);
+          buttonsEl.appendChild(btn);
+        });
+      }
+
+      function clearButtons() {
+        buttonsEl.innerHTML = '';
+      }
+
+      function showPhoneInput() {
+        clearButtons();
+        phoneWrap.style.display = 'flex';
+        phoneInput.focus();
+      }
+
+      // ===== СЦЕНАРИЙ =====
+      function stepStart() {
+        state = { step: 'service', service: null, detail: null };
+        bubble('Здравствуйте! Я помогу узнать стоимость ремонта. Выберите услугу:', 'bot');
+        setButtons(SERVICES.map(s => s.name), (label) => {
+          const svc = SERVICES.find(s => s.name === label);
+          bubble(label, 'user');
+          stepService(svc);
+        });
+      }
+
+      function stepService(svc) {
+        state.service = svc;
+        state.step = 'detail';
+        clearButtons();
+        setTimeout(() => {
+          bubble('💰 Ориентировочные цены:\n' + svc.info, 'bot');
+          setTimeout(() => {
+            bubble(svc.question, 'bot');
+            const opts = [...svc.options, 'Затрудняюсь ответить'];
+            setButtons(opts, (label) => {
+              bubble(label, 'user');
+              stepDetail(label);
+            });
+          }, 400);
+        }, 300);
+      }
+
+      function stepDetail(detail) {
+        state.detail = detail;
+        state.step = 'phone';
+        clearButtons();
+        setTimeout(() => {
+          bubble('Хорошо! Мастер приедет и даст точную оценку на месте — бесплатно.
+
+Оставьте номер — перезвоним в удобное время:', 'bot');
+          showPhoneInput();
+        }, 300);
+      }
+
+      function stepSend() {
+        const raw = phoneInput.value.replace(/\D/g, '');
+        if (raw.length < 10) {
+          phoneInput.style.outline = '2px solid #E74C3C';
+          return;
+        }
+        phoneInput.style.outline = '';
+        const phone = phoneInput.value;
+        bubble(phone, 'user');
+        phoneWrap.style.display = 'none';
+        state.step = 'done';
+
+        const text = encodeURIComponent(
+          'Заявка с сайта re-fix.kz\n\n' +
+          'Услуга: ' + (state.service ? state.service.name : 'не указана') + '\n' +
+          'Деталь: ' + (state.detail || 'не указано') + '\n' +
+          'Телефон: ' + phone
+        );
+
+        setTimeout(() => {
+          bubble('Отлично! Открываю WhatsApp — свяжемся с вами в ближайшее время! 📞', 'bot');
+          window.open('https://wa.me/' + WA_NUMBER + '?text=' + text, '_blank');
+          setTimeout(() => {
+            setButtons(['Новый вопрос'], () => {
+              messagesEl.innerHTML = '';
+              stepStart();
+            });
+          }, 600);
+        }, 300);
+      }
+
+      // ===== ТОГГЛ ОТКРЫТИЯ =====
       function toggleChat() {
-        if (chatWidget.style.display === "none" || chatWidget.style.display === "") {
-          chatWidget.style.display = "flex";
-          chatToggleBtn.style.display = "none";
+        if (widget.style.display === 'none' || widget.style.display === '') {
+          widget.style.display = 'flex';
+          toggleBtn.style.display = 'none';
         } else {
-          chatWidget.style.display = "none";
-          chatToggleBtn.style.display = "flex";
+          widget.style.display = 'none';
+          toggleBtn.style.display = 'flex';
         }
       }
+      window.toggleChat = toggleChat;
 
-      function addChatMessage(text, role) {
-        const div = document.createElement("div");
-        div.className = "chat-message " + role;
-        div.textContent = text;
-        chatMessagesEl.appendChild(div);
-        chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
-      }
-
-      async function sendChatMessage() {
-        const userText = chatInputEl.value.trim();
-        if (!userText) return;
-
-        // Добавляем сообщение пользователя в историю и UI
-        chatHistory.push({ role: "user", content: userText });
-        addChatMessage(userText, "user");
-        chatInputEl.value = "";
-        chatSendBtn.disabled = true;
-
-        const thinkingMsg = "Мастер думает над вариантом ремонта...";
-        addChatMessage(thinkingMsg, "assistant");
-
-        try {
-          const response = await fetch("https://re-fix-kz.onrender.com/api/chat", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            // Передаём всю историю диалога, а не только последнее сообщение
-            body: JSON.stringify({ messages: chatHistory })
-          });
-
-          const data = await response.json();
-
-          const lastAssistant = chatMessagesEl.querySelector(".chat-message.assistant:last-child");
-          if (lastAssistant && lastAssistant.textContent === thinkingMsg) lastAssistant.remove();
-
-          const reply = data.reply || "Не удалось получить ответ мастера. Попробуйте ещё раз позже.";
-
-          // Сохраняем ответ AI в историю
-          chatHistory.push({ role: "assistant", content: reply });
-          addChatMessage(reply, "assistant");
-        } catch (err) {
-          const lastAssistant = chatMessagesEl.querySelector(".chat-message.assistant:last-child");
-          if (lastAssistant && lastAssistant.textContent === thinkingMsg) lastAssistant.remove();
-          addChatMessage("Ошибка подключения к мастеру. Попробуйте ещё раз.", "assistant");
-          console.error(err);
-        } finally {
-          chatSendBtn.disabled = false;
-        }
-      }
-
-      chatSendBtn.addEventListener("click", sendChatMessage);
-      chatInputEl.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") sendChatMessage();
+      // ===== ФОН ВВОДА ТЕЛЕФОНА =====
+      phoneInput.addEventListener('input', function() {
+        let v = this.value.replace(/\D/g, '');
+        let f = '';
+        if (v.length > 0) f = '+' + v.substring(0, 1);
+        if (v.length > 1) f += ' (' + v.substring(1, 4);
+        if (v.length > 4) f += ') ' + v.substring(4, 7);
+        if (v.length > 7) f += '-' + v.substring(7, 9);
+        if (v.length > 9) f += '-' + v.substring(9, 11);
+        this.value = f;
       });
-      
-      addChatMessage("Здравствуйте! 👋 Я онлайн-мастер Re-Fix. Опишите вашу проблему или задайте вопрос о ремонте мебели. Ответим за 2 минуты!", "assistant");
+      phoneInput.addEventListener('keydown', e => { if (e.key === 'Enter') stepSend(); });
+      phoneSend.addEventListener('click', stepSend);
+
+      // ===== СТАРТ =====
+      stepStart();
+    })();
     </script>
 </body>
 </html>
