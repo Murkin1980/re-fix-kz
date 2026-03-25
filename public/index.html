@@ -1132,6 +1132,10 @@
         <input type="tel" id="chat-phone" placeholder="+7 (___) ___-__-__" />
         <button id="chat-phone-send">Отправить</button>
       </div>
+      <div id="chat-text-input">
+        <input type="text" id="chat-text" placeholder="Задайте вопрос..." />
+        <button id="chat-text-send">→</button>
+      </div>
     </div>
     
     <!-- Кнопка открытия чата -->
@@ -1279,6 +1283,33 @@
         transition: background 150ms;
       }
       #chat-phone-send:hover { background: #D35400; }
+      #chat-text-input {
+        display: flex;
+        border-top: 1px solid #E0E0E0;
+        background: #fff;
+        flex-shrink: 0;
+      }
+      #chat-text {
+        flex: 1;
+        border: none;
+        padding: 10px 12px;
+        font-family: inherit;
+        font-size: 14px;
+        outline: none;
+        color: var(--text-primary);
+      }
+      #chat-text::placeholder { color: #BDBDBD; }
+      #chat-text-send {
+        border: none;
+        padding: 0 16px;
+        background: var(--secondary);
+        color: #fff;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        transition: background 150ms;
+      }
+      #chat-text-send:hover { background: #D35400; }
       @media (max-width: 768px) {
         #chat-widget {
           right: 0; left: 0; bottom: 0;
@@ -1473,6 +1504,52 @@
       let state = { step: 'start', service: null, detail: null };
       const WA_NUMBER = '77059164337';
 
+      // ===== ОТВЕТЫ НА ЧАСТЫЕ ВОПРОСЫ =====
+      const FAQ = [
+        {
+          keywords: ['дорого', 'дороговато', 'дешевле', 'дешевлье', 'зачем', 'почему'],
+          answer: 'Выезд мастера стоит 5 000 ₸ — это базовая стоимость вызова. Дальше — работа + материал.
+
+Например: замена петли = 5 000 ₸ (выезд) + 800–1 500 ₸ (сама петля) = ~6 000–7 000 ₸.
+Замена направляющих ящика = 5 000 ₸ (выезд) + 2 000–4 000 ₸ (запчасть) = ~7 000–9 000 ₸.
+
+Esли работ несколько — выезд засчитывается один раз.'
+        },
+        {
+          keywords: ['выезд', 'бесплатно', 'замер', 'замер'],
+          answer: 'Бесплатный замер входит в стоимость при изготовлении мебели на заказ.
+При ремонтных работах — выезд мастера 5 000 ₸, входит в стоимость работы.'
+        },
+        {
+          keywords: ['гарантия', 'гарантий'],
+          answer: 'Даём гарантию на все виды работ и материалы. Если что-то пойдёт не так — приедем и исправим бесплатно.'
+        },
+        {
+          keywords: ['срок', 'быстро', 'когда', 'долго'],
+          answer: 'Мелкий ремонт (петли, фурнитура) — 1 час – полдня.
+Замена столешницы или фасадов — от 1 дня.
+Изготовление мебели — от 7 дней (зависит от сложности).'
+        },
+        {
+          keywords: ['район', 'адрес', 'алматы', 'область', 'приедете', 'работаете'],
+          answer: 'Работаем по Алматы и Алматинской области в радиусе 100 км. Выезд без дополнительных сборов.'
+        },
+        {
+          keywords: ['оплата', 'наличными', 'перевод', 'каспи', 'картой'],
+          answer: 'Принимаем наличными, переводом на каспи, по договорённости.'
+        }
+      ];
+
+      function findFaqAnswer(text) {
+        const lower = text.toLowerCase();
+        for (const item of FAQ) {
+          if (item.keywords.some(kw => lower.includes(kw))) {
+            return item.answer;
+          }
+        }
+        return null;
+      }
+
       // ===== UI ФУНКЦИИ =====
       function bubble(text, who) {
         const d = document.createElement('div');
@@ -1598,6 +1675,28 @@
       });
       phoneInput.addEventListener('keydown', e => { if (e.key === 'Enter') stepSend(); });
       phoneSend.addEventListener('click', stepSend);
+
+      // ===== ТЕКСТОВЫЙ ВОПРОС =====
+      const textInput = document.getElementById('chat-text');
+      const textSend  = document.getElementById('chat-text-send');
+
+      function handleTextInput() {
+        const val = textInput.value.trim();
+        if (!val) return;
+        bubble(val, 'user');
+        textInput.value = '';
+        const answer = findFaqAnswer(val);
+        setTimeout(() => {
+          if (answer) {
+            bubble(answer, 'bot');
+          } else {
+            bubble('Не совсем понял — но мастер свяжется с вами лично. Оставьте номер — перезвоним!', 'bot');
+          }
+        }, 300);
+      }
+
+      textSend.addEventListener('click', handleTextInput);
+      textInput.addEventListener('keydown', e => { if (e.key === 'Enter') handleTextInput(); });
 
       // ===== СТАРТ =====
       stepStart();
