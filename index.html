@@ -741,6 +741,116 @@
                 padding: 24px;
             }
         }
+        
+        /* Popup Styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .popup-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .popup {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .popup-overlay.show .popup {
+            transform: scale(1);
+        }
+        
+        .popup-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #7F8C8D;
+            padding: 4px;
+            transition: color 0.2s;
+        }
+        
+        .popup-close:hover {
+            color: #2C3E50;
+        }
+        
+        .popup-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(230, 126, 34, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: #E67E22;
+        }
+        
+        .popup h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            color: #2C3E50;
+            margin-bottom: 12px;
+        }
+        
+        .popup p {
+            color: #7F8C8D;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+        
+        .popup-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 14px 24px;
+            background: #E67E22;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+        
+        .popup-btn:hover {
+            background: #D35400;
+            transform: translateY(-2px);
+        }
+        
+        .popup-note {
+            font-size: 0.8rem;
+            color: #BDC3C7;
+            margin-top: 16px;
+        }
     </style>
 </head>
 <body>
@@ -1120,6 +1230,25 @@
         <i data-lucide="message-circle"></i>
     </a>
     
+    <!-- Popup -->
+    <div class="popup-overlay" id="popup">
+        <div class="popup">
+            <button class="popup-close" onclick="closePopup()">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="popup-icon">
+                <i data-lucide="smartphone"></i>
+            </div>
+            <h3>Подписывайтесь на нас!</h3>
+            <p>Добавьте наш канал в WhatsApp, чтобы получать скидки и специальные предложения</p>
+            <a href="https://bit.ly/m/refix" class="popup-btn" target="_blank" rel="noopener noreferrer">
+                <i data-lucide="message-circle"></i>
+                Подписаться на канал
+            </a>
+            <p class="popup-note">Нажмите, чтобы открыть WhatsApp канал</p>
+        </div>
+    </div>
+    
     <script>
         // Initialize Lucide icons
         lucide.createIcons();
@@ -1216,6 +1345,30 @@
                     target.scrollIntoView({ behavior: 'smooth' });
                 }
             });
+        });
+        
+        // Popup functions
+        function closePopup() {
+            document.getElementById('popup').classList.remove('show');
+            localStorage.setItem('popupShown', 'true');
+        }
+        
+        function showPopup() {
+            const wasShown = localStorage.getItem('popupShown');
+            if (!wasShown) {
+                setTimeout(() => {
+                    document.getElementById('popup').classList.add('show');
+                    lucide.createIcons();
+                }, 1500);
+            }
+        }
+        
+        showPopup();
+        
+        document.getElementById('popup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePopup();
+            }
         });
     </script>
 </body>
