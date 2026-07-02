@@ -3,6 +3,7 @@ const phoneDisplay = '+7 705 916 43 37';
 const phoneE164 = '+77059164337';
 const waNumber = '77059164337';
 const canonical = 'https://re-fix.kz/';
+const iconSvg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23142129'/%3E%3Cpath d='M17 39V18h18c7 0 11 4 11 10 0 4-2 7-6 9l8 9H37l-7-8h-4v8h-9zm9-16v8h8c3 0 5-2 5-4s-2-4-5-4h-8z' fill='%23e67e22'/%3E%3C/svg%3E";
 
 const services = [
   ['Ремонт кухонь', 'Фасады, петли, ящики, направляющие, столешницы и встроенная техника.'],
@@ -55,8 +56,7 @@ const jsonLd = {
     <meta property="og:locale" content="ru_KZ" />
     <meta name="theme-color" content="#1c2a32" />
     <link rel="manifest" href="/manifest.json" />
-    <link rel="icon" type="image/png" href="/assets/logo.png" />
-    <link rel="preload" href="/assets/logo.png" as="image" />
+    <link rel="icon" href={iconSvg} />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <link rel="stylesheet" href="/src/styles/global.css" />
   </head>
@@ -65,7 +65,7 @@ const jsonLd = {
 
     <header class="site-header glass-nav">
       <a class="brand" href="#top" aria-label="RE-FIX.KZ главная">
-        <img src="/assets/logo.png" alt="RE-FIX.KZ" width="132" height="40" />
+        <span class="brand-mark">R</span><span class="brand-text">RE-FIX.KZ</span>
       </a>
       <nav class="nav-links" aria-label="Основная навигация">
         <a href="#services">Услуги</a>
