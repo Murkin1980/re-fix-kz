@@ -1,0 +1,50 @@
+{
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  "@id": "https://re-fix.kz/#business",
+  "name": "RE-FIX.KZ",
+  "alternateName": "Re-Fix",
+  "url": "https://re-fix.kz/",
+  "description": "Ремонт корпусной мебели, кухонь, шкафов, фасадов, ящиков, петель, направляющих, столешниц и мебельной фурнитуры в Алматы и Алматинской области.",
+  "telephone": "+77059164337",
+  "email": "info@re-fix.kz",
+  "priceRange": "₸₸",
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "Алматы"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Алматинская область"
+    }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Алматы",
+    "addressCountry": "KZ"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "opens": "09:00",
+      "closes": "20:00"
+    }
+  ],
+  "makesOffer": [
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ремонт корпусной мебели" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ремонт кухонной мебели" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ремонт шкафов и шкафов-купе" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Замена мебельной фурнитуры" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Замена столешниц" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Врезка моек и встроенной техники" } }
+  ]
+}
