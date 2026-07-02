@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 const phoneDisplay = '+7 705 916 43 37';
 const phoneE164 = '+77059164337';
 const waNumber = '77059164337';
@@ -58,7 +60,6 @@ const jsonLd = {
     <link rel="manifest" href="/manifest.json" />
     <link rel="icon" href={iconSvg} />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-    <link rel="stylesheet" href="/src/styles/global.css" />
   </head>
   <body>
     <div class="ambient" aria-hidden="true"></div>
