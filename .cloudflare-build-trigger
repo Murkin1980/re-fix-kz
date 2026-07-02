@@ -1,0 +1,2 @@
+trigger: 2026-07-02T23:20+05:00
+reason: force Cloudflare Git build after Astro migration
