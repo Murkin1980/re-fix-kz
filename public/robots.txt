@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://re-fix.kz/sitemap.xml
+
+# AI/search agent discovery
+Allow: /llms.txt
+Allow: /ai-site-profile.json
