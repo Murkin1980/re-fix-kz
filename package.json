@@ -1,14 +1,20 @@
 {
-  "name": "refix-chat-proxy",
+  "name": "re-fix-kz",
   "version": "1.0.0",
-  "description": "Backend proxy for Re-Fix chat AI",
-  "main": "server.js",
+  "private": true,
+  "type": "module",
+  "description": "Astro static landing page for RE-FIX.KZ furniture repair service in Almaty.",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "deploy": "npm run build && wrangler deploy",
+    "cf:dev": "npm run build && wrangler dev"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "cors": "^2.8.5"
+    "astro": "latest"
+  },
+  "devDependencies": {
+    "wrangler": "latest"
   }
 }
