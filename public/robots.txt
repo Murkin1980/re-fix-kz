@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://re-fix.kz/sitemap.xml
+Sitemap: https://refix.salamatmebel.kz/sitemap.xml
 
 # AI/search agent discovery
 Allow: /llms.txt
